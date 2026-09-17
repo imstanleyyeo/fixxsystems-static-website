@@ -1,0 +1,38 @@
+@use "sass:map";
+@use "sass:math";
+@use '../abstracts' as *;
+
+.l-section {
+    width: 100%;
+    padding-top: fluid(60px, 120px);
+    padding-bottom: fluid(60px, 120px);
+    border: none; // Ensures no accidental global borders
+
+    /* Automatic fallback alternating backgrounds */
+    &:nth-of-type(odd) {
+        background-color: $color-neutral-lightest; // #f9f9f9
+    }
+
+    &:nth-of-type(even) {
+        background-color: $color-white; // #ffffff
+    }
+
+    /* Explicit Overrides */
+    &--white {
+        background-color: $color-white !important;
+    }
+
+    &--light {
+        background-color: $color-neutral-lightest !important;
+    }
+
+    &--dark {
+        background-color: $color-primary-dark;
+        color: $color-white;
+    }
+
+    &--compact {
+        padding-top: fluid(32px, 64px);
+        padding-bottom: fluid(32px, 64px);
+    }
+}

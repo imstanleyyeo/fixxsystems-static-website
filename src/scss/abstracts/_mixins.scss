@@ -1,0 +1,262 @@
+@use "sass:map";
+@use "sass:math";
+@use "sass:meta";
+@use "sass:list";
+@use 'variables' as *;
+
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+@mixin respond($breakpoint) {
+    $value: map.get($breakpoints, $breakpoint);
+
+    @if $value {
+        @media (min-width: $value) {
+            @content;
+        }
+    }
+
+    @else {
+        @warn "⚠️ Unknown breakpoint: #{$breakpoint}.";
+    }
+}
+
+// Fixed respond-below with universal math subtraction
+@mixin respond-below($breakpoint) {
+    $value: map.get($breakpoints, $breakpoint);
+
+    @if $value {
+        // Simple subtraction avoids dependency on math.sub
+        $max-value: $value - 1px;
+
+        @media (max-width: $max-value) {
+            @content;
+        }
+    }
+
+    @else {
+        @warn "⚠️ Unknown breakpoint: #{$breakpoint}.";
+    }
+}
+
+/* ==========================================================================
+   TRANSITION & ANIMATION HELPERS
+   ========================================================================== */
+@mixin transition($properties: all, $speed: "base") {
+    $timing: $transition-base;
+
+    @if $speed =="fast" {
+        $timing: $transition-fast;
+    }
+
+    @else if $speed =="slow" {
+        $timing: $transition-slow;
+    }
+
+    @else if meta.type-of($speed) !="string" {
+        $timing: $speed;
+    }
+
+    $transition-list: (
+    );
+
+@each $prop in $properties {
+    // 👈 Updated from append(...) to list.append(...)
+    $transition-list: list.append($transition-list, #{$prop} #{$timing}, comma);
+}
+
+transition: $transition-list;
+}
+
+/* ==========================================================================
+   FLUID TYPOGRAPHY ENGINE & MATH
+   ========================================================================== */
+@function strip-unit($number) {
+    @if meta.type-of($number)=='number' and not math.is-unitless($number) {
+        @return math.div($number, ($number * 0 + 1));
+    }
+
+    @return $number;
+}
+
+@function fluid($min-size,
+    $max-size,
+    $min-vw: map.get($breakpoints, xs),
+    $max-vw: map.get($breakpoints, xl)) {
+    $min-s: strip-unit($min-size);
+    $max-s: strip-unit($max-size);
+    $min-v: strip-unit($min-vw);
+    $max-v: strip-unit($max-vw);
+
+    $slope: math.div($max-s - $min-s, $max-v - $min-v);
+    $y-axis-intersection: -($min-v) * $slope + $min-s;
+
+    @return clamp(#{$min-size}, #{$y-axis-intersection}px + #{$slope * 100}vw, #{$max-size});
+}
+
+@mixin apply-typography($role, $weight-override: null) {
+    $token-group: map.get($typography-system, $role);
+
+    @if not $token-group {
+        @error "❌ Typographic role '#{$role}' does not exist in your system map.";
+    }
+
+    font-family: map.get($token-group, "family");
+
+    @if $weight-override {
+        font-weight: $weight-override;
+    }
+
+    @else {
+        font-weight: map.get($token-group, "weight");
+    }
+
+    line-height: map.get($token-group, "line-height");
+    letter-spacing: map.get($token-group, "letter-spacing");
+
+    // Dynamic text-transform support from map tokens
+    @if map.has-key($token-group, "transform") {
+        text-transform: map.get($token-group, "transform");
+    }
+
+    // Preserve your fluid sizing calculations
+    $base-rem: map.get($token-group, "size");
+    $raw-scalar: strip-unit($base-rem);
+    $min-px: $raw-scalar * $font-size-root-mobile;
+    $max-px: $raw-scalar * $font-size-root-desktop;
+
+    font-size: fluid($min-px, $max-px);
+}
+
+@mixin apply-elevation($tier) {
+    box-shadow: map.get($elevations, $tier);
+}
+
+/* ==========================================================================
+   CARD ARCHITECTURE ENGINE
+   ========================================================================== */
+@mixin configure-card-container($archetype: "contained-thumbnail", $is-clickable: false) {
+    display: block;
+    position: relative;
+    background-color: $color-white;
+
+    // 1. Corner Border Treatment mapped to standard border-radius scale
+    @if $archetype =="compact-flat" {
+        border-radius: $border-radius-xs;
+        border: 1px solid rgba($color-neutral-medium, 0.12);
+    }
+
+    @else {
+        border-radius: $border-radius-md;
+        border: 1px solid rgba($color-neutral-medium, 0.06);
+    }
+
+    // 2. Automated Altitude Shadows
+    @if $archetype =="macro-elevated" {
+        @include apply-elevation("card-premium");
+    }
+
+    @else if $archetype =="compact-flat" {
+        @include apply-elevation("component-low");
+    }
+
+    @else {
+        @include apply-elevation("card-static");
+    }
+
+    // 3. Automated Container Spacing Matrix
+    @if $archetype =="contained-thumbnail" {
+        padding: 0.75rem;
+    }
+
+    @else if $archetype =="contained-image" {
+        padding: 0.5rem;
+    }
+
+    @else if $archetype =="flush-media" {
+        padding: 0;
+    }
+
+    @else if $archetype =="macro-elevated" or $archetype =="macro-static" {
+        padding: fluid(24px, 40px);
+    }
+
+    @else if $archetype =="compact-flat" {
+        padding: fluid(12px, 20px);
+    }
+
+    // 4. Interactive State Control
+    @if $is-clickable ==true {
+        cursor: pointer;
+        transition: transform $transition-slow, box-shadow $transition-slow;
+
+        &:hover {
+            @include apply-elevation("card-hover");
+            transform: translateY(-4px);
+        }
+    }
+}
+
+/* ==========================================================================
+   SUB-ELEMENT TEXT & MEDIA HELPERS
+   ========================================================================== */
+@mixin configure-card-text-inner {
+    padding: fluid(16px, 24px);
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin card-thumbnail-image($archetype: "contained-thumbnail", $size: 96px) {
+    width: $size;
+    height: $size;
+    object-fit: cover;
+
+    $padding-value: 0rem;
+
+    @if $archetype =="contained-thumbnail" {
+        $padding-value: 0.75rem;
+    }
+
+    @else if $archetype =="contained-image" {
+        $padding-value: 0.5rem;
+    }
+
+    border-radius: calc(#{$border-radius-md} - #{$padding-value});
+}
+
+@mixin card-top-flush-image {
+    width: calc(100% + 1.5rem);
+    margin-top: -0.75rem;
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+    margin-bottom: 0.75rem;
+    height: 160px;
+    object-fit: cover;
+    border-radius: #{$border-radius-md} #{$border-radius-md} 0 0;
+}
+
+@mixin configure-card-media-frame($aspect-ratio: "1 / 1", $archetype: "contained-image") {
+    width: 100%;
+    aspect-ratio: #{$aspect-ratio};
+    overflow: hidden;
+
+    $padding-value: 0rem;
+
+    @if $archetype =="contained-thumbnail" {
+        $padding-value: 0.75rem;
+    }
+
+    @else if $archetype =="contained-image" or $archetype =="compact-flat" {
+        $padding-value: 0.5rem;
+    }
+
+    border-radius: calc(#{$border-radius-md} - #{$padding-value});
+
+    img,
+    .card-target-img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}

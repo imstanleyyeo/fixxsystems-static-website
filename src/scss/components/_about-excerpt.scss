@@ -1,0 +1,60 @@
+@use "sass:map";
+@use "../abstracts" as *;
+
+.c-about-excerpt {
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: fluid(32px, 64px);
+        align-items: center;
+
+        @include respond('lg') {
+            // Equal 2-column grid with a larger whitespace gap
+            grid-template-columns: 1fr 1fr;
+            column-gap: fluid(64px, 96px);
+        }
+    }
+
+    &__media {
+        border-radius: $border-radius-md;
+        overflow: hidden;
+        @include apply-elevation("card-static");
+
+        @include respond('lg') {
+            // Restricts image container width to 3/4 of the left column
+            width: 75%;
+            // Set explicit aspect ratio to prevent layout shifts
+            aspect-ratio: 4 / 3;
+        }
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+
+    &__overline {
+        @include apply-typography("overline");
+        color: $color-secondary;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    &__title {
+        @include apply-typography("heading", $font-weight-semibold);
+        color: $color-primary;
+        margin-bottom: 1rem;
+    }
+
+    &__text {
+        @include apply-typography("body");
+        color: $color-neutral-dark;
+        margin-bottom: 1rem;
+
+        &:last-of-type {
+            margin-bottom: 1.5rem;
+        }
+    }
+}

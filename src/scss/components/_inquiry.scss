@@ -1,0 +1,40 @@
+@use "../abstracts" as *;
+
+.c-inquiry {
+    background-color: $color-neutral-lightest; // Consistent light section fill
+    border-top: 1px solid $color-neutral-light; // Distinct separator from main content
+    border-bottom: 1px solid $color-neutral-light;
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+
+        @include respond('md') {
+            flex-direction: row;
+            align-items: flex-end; // Aligns button to the bottom level of supporting text
+            justify-content: space-between;
+        }
+    }
+
+    &__body {
+        max-width: 44rem;
+    }
+
+    &__title {
+        @include apply-typography("heading", $font-weight-semibold);
+        color: $color-primary;
+        margin-bottom: 0.5rem;
+    }
+
+    &__subtitle {
+        @include apply-typography("meta-heading");
+        color: $color-neutral-medium;
+        margin-bottom: 0; // Removes margin so button aligns perfectly to baseline
+    }
+
+    &__action {
+        flex-shrink: 0;
+    }
+}

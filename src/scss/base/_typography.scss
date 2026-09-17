@@ -1,0 +1,96 @@
+@use '../abstracts' as *;
+
+body {
+    font-family: $font-family-primary;
+    @include apply-typography("body");
+    color: $color-neutral-dark;
+}
+
+a {
+    color: inherit; // Fallback safely to the parent element's text color
+    text-decoration: none; // Turn off underlines globally so buttons/logos/cards don't break
+    cursor: pointer;
+
+    // Smooth color change framework baseline
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+// Vertical Rhythm
+// Establish explicit down-stack typography relationships
+h1,
+h2,
+.display,
+.heading {
+    margin-bottom: fluid(16px, 24px);
+}
+
+h3,
+.title {
+    margin-bottom: fluid(12px, 18px);
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: fluid(16px, 24px); // Clean structural baseline distance for narrative reading flow
+
+    &:last-child {
+        margin-bottom: 0; // Prevents leakage out of structural wrapper parent components
+    }
+}
+
+// Global Element Role Mappings
+.display {
+    @include apply-typography("display");
+}
+
+.heading {
+    @include apply-typography("heading");
+}
+
+.subheading {
+    @include apply-typography("subheading");
+}
+
+.title {
+    @include apply-typography("title");
+}
+
+.subtitle {
+    @include apply-typography("subtitle");
+    color: $color-neutral-medium;
+}
+
+.meta-heading {
+    @include apply-typography("meta-heading");
+}
+
+.button {
+    @include apply-typography("button");
+}
+
+.caption {
+    @include apply-typography("caption");
+}
+
+.overline {
+    @include apply-typography("overline");
+    text-transform: uppercase; // Keeps design presentation separate
+    display: inline-block;
+}
+
+// Clean Variant Implementations without property duplication
+.body-semibold {
+    @include apply-typography("body", $font-weight-semibold);
+}
+
+.body-regular {
+    @include apply-typography("body", $font-weight-regular);
+}
+
+.caption-semibold {
+    @include apply-typography("caption", $font-weight-semibold);
+}
+
+.caption-regular {
+    @include apply-typography("caption", $font-weight-regular);
+}

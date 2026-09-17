@@ -1,0 +1,49 @@
+@use "sass:map";
+@use "../abstracts" as *;
+
+.c-stats {
+    padding-top: fluid(32px, 56px);
+    padding-bottom: fluid(32px, 56px);
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: fluid(24px, 48px);
+
+        @include respond('md') {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Unified Value Target: Locks height and font display across ALL items */
+    &__value {
+        @include apply-typography("heading");
+        font-weight: $font-weight-black;
+        color: $color-primary;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        min-height: fluid(48px, 72px); // Prevents vertical alignment shift
+
+        /* Optional accent modifier if you want brand color contrast on certification */
+        &--accent {
+            color: $color-secondary;
+        }
+    }
+
+    &__label {
+        @include apply-typography("caption");
+        color: $color-neutral-dark;
+        font-weight: $font-weight-medium;
+        max-width: 200px; // Keeps label text cleanly wrapped below each value
+    }
+}

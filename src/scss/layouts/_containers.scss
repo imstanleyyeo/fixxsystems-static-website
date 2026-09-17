@@ -1,0 +1,29 @@
+@use "sass:map";
+@use "sass:math";
+@use '../abstracts' as *;
+
+/* ==========================================================================
+   LAYOUT OBJECT: CONTAINERS
+   ========================================================================== */
+
+.o-container {
+    width: 100%;
+    max-width: $container-width-3xlarge; // 1600px constraint
+    margin-left: auto;
+    margin-right: auto;
+
+    // Always maintain fluid safe-zone gutters (16px on mobile -> 32px on desktop)
+    // This removes media-query "snapping" completely!
+    padding-left: fluid(16px, 32px);
+    padding-right: fluid(16px, 32px);
+
+    // Optional variant for tighter editorial content
+    &--narrow {
+        max-width: $container-width-medium; // 768px
+    }
+
+    // Optional variant for wide media grids
+    &--wide {
+        max-width: $container-width-4xlarge; // 1920px
+    }
+}

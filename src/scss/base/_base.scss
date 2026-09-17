@@ -1,0 +1,64 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+/* ==========================================================================
+   GLOBAL ROOT & DOCUMENT BASE
+   ========================================================================== */
+html {
+    // Scales 1rem dynamically between mobile ($font-size-root-mobile) and desktop ($font-size-root-desktop)
+    font-size: fluid($font-size-root-mobile, $font-size-root-desktop);
+    scroll-behavior: smooth;
+}
+
+body {
+    padding-top: 72px; // Match exact height of your desktop header bar
+    background-color: $color-neutral-lightest; // Set default light page backdrop
+    color: $color-neutral-dark; // Standard baseline body text color
+    font-family: $font-family-primary;
+    min-height: 100vh; // Required for main sticky footer flex engine
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   LAYOUT STRUCTURE & EXPANSION
+   ========================================================================== */
+main {
+    flex: 1 0 auto; // Stretches content to push footer down on thin pages
+    width: 100%;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY FALLBACKS (UNCLASSED ELEMENTS)
+   ========================================================================== */
+p {
+    @include apply-typography("body");
+    color: $color-neutral-dark;
+    margin-bottom: 1rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+a {
+    color: $color-primary;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover,
+    &:focus-visible {
+        color: $color-primary-light;
+    }
+}
+
+img,
+svg,
+picture {
+    max-width: 100%;
+    display: block;
+}

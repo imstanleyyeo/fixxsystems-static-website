@@ -1,0 +1,278 @@
+@use "sass:map";
+@use "../abstracts" as *;
+
+/* ==========================================================================
+   COMPONENT: BUTTONS (_buttons.scss)
+   ========================================================================== */
+
+/* Base Button Setup */
+.c-btn {
+    @include apply-typography("button");
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.25rem;
+    border-radius: $border-radius-sm;
+    text-decoration: none;
+    text-align: center;
+    font-weight: $font-weight-bold;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    @include transition((color, background-color, border-color, box-shadow), "normal");
+
+    /* ----------------------------------------------------------------------
+       1. PRIMARY CTA BUTTON (Swipe Animation from _nav.scss)
+       ---------------------------------------------------------------------- */
+    &--primary {
+        position: relative;
+        z-index: 1;
+        overflow: hidden; // Clips swiping background layer
+        background-color: $color-secondary; // #2a0002 Warm Coffee
+        color: $color-white;
+        border: 1px solid $color-secondary;
+
+        /* Pseudo-element swipe layer */
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-color: $color-secondary-dark;
+            transform: scaleX(0);
+            transform-origin: left center;
+            @include transition(transform, "medium");
+        }
+
+        &:hover,
+        &:focus-visible {
+            color: $color-accent;
+            border-color: $color-secondary-dark;
+
+            &::before {
+                transform: scaleX(1);
+            }
+        }
+    }
+
+    /* ----------------------------------------------------------------------
+   ACCENT CTA BUTTON (Used in Header, Drawer, and Hero Overlays)
+   ---------------------------------------------------------------------- */
+    &--accent {
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+        overflow: hidden;
+        background-color: $color-accent;
+        color: $color-primary-dark;
+        font-weight: $font-weight-bold;
+        border-radius: $border-radius-sm;
+        // padding: 0.85rem 1.25rem;
+        text-align: center;
+        border: 1px solid $color-accent;
+        @include transition(color, "medium");
+
+        /* Swipe Effect */
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-color: $color-accent-dark;
+            transform: scaleX(0);
+            transform-origin: left center;
+            @include transition(transform, "medium");
+        }
+
+        &:hover,
+        &:focus-visible {
+            color: $color-primary-dark;
+            border-color: $color-accent-dark;
+
+            &::before {
+                transform: scaleX(1);
+            }
+        }
+    }
+
+    /* ----------------------------------------------------------------------
+       2. SECONDARY BUTTON (Hollow / Outline)
+       ---------------------------------------------------------------------- */
+    &--secondary,
+    &--outline {
+        position: relative;
+        z-index: 1;
+        overflow: hidden; // Clips the swiping layer to match border-radius
+        background-color: transparent;
+        color: $color-white;
+        border-color: $color-white;
+        @include transition(color, "medium");
+
+        /* Pseudo-element swipe layer */
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1; // Sits behind the text
+            background-color: $color-white; // Fills with solid white
+            transform: scaleX(0);
+            transform-origin: left center; // Swipes from left to right
+            @include transition(transform, "medium");
+        }
+
+        &:hover,
+        &:focus-visible {
+            color: $color-primary; // Text switches to high-contrast dark color
+
+            &::before {
+                transform: scaleX(1); // Fills background smoothly on hover
+            }
+        }
+    }
+
+    /* Default / Dark Outline Variant (For White Backgrounds) */
+    &--outline-dark {
+        color: $color-primary;
+        border-color: $color-primary;
+
+        &::before {
+            background-color: $color-primary;
+        }
+
+        &:hover,
+        &:focus-visible {
+            color: $color-white;
+        }
+    }
+
+    /* ----------------------------------------------------------------------
+   3. GHOST / TERTIARY BUTTON (Arrow Swap + Background Swipe)
+   ---------------------------------------------------------------------- */
+    &--ghost {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        width: fit-content;
+        max-width: 100%;
+        white-space: nowrap;
+
+        background-color: transparent;
+        color: $color-secondary;
+        border: 1px solid transparent;
+        padding: 0.75rem 1.25rem;
+        border-radius: $border-radius-sm;
+        transition: color 0.3s ease, background-color 0.3s ease;
+
+        /* RECOVERED: Neutral Swipe Layer (Attached to button container) */
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-color: rgba($color-primary, 0.06);
+            transform: scaleX(0);
+            transform-origin: left center;
+            @include transition(transform, "medium");
+        }
+
+        /* BUTTON LABEL WRAPPER (Handles text glide & includes Left Arrow) */
+        .c-btn__label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transform: translateX(0);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+            /* LEFT ARROW (Inside label element so it glides left with the text) */
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 1.125rem;
+                height: 1.125rem;
+                flex-shrink: 0;
+                background-color: currentColor;
+                mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>') no-repeat center / contain;
+                -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>') no-repeat center / contain;
+
+                opacity: 1;
+                transform: translateX(0);
+                transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+            }
+        }
+
+        /* RIGHT ARROW (Hidden off-screen right by default) */
+        &::after {
+            content: '';
+            display: inline-block;
+            width: 1.125rem;
+            height: 1.125rem;
+            flex-shrink: 0;
+            background-color: currentColor;
+            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>') no-repeat center / contain;
+            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>') no-repeat center / contain;
+
+            margin-left: -1.625rem;
+            opacity: 0;
+            transform: translateX(8px);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+        }
+
+        &:hover,
+        &:focus-visible {
+            color: $color-primary;
+
+            /* 1. Triggers background swipe in from left to right */
+            &::before {
+                transform: scaleX(1);
+            }
+
+            /* 2. Text + Left arrow glide left */
+            .c-btn__label {
+                transform: translateX(-1.625rem);
+
+                &::before {
+                    opacity: 0;
+                    transform: translateX(-10px);
+                }
+            }
+
+            /* 3. Right arrow slides in from right */
+            &::after {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    }
+
+    /* ----------------------------------------------------------------------
+       UTILITY VARIANTS
+       ---------------------------------------------------------------------- */
+    /* Full-width block modifier */
+    &--full {
+        width: 100%;
+    }
+
+    /* Fixed Bottom Mobile CTA */
+    &--fixed-mobile {
+        @include respond-below('lg') {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            border-radius: 0;
+            z-index: map.get($z-index, "sticky");
+            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        @include respond('lg') {
+            display: inline-flex;
+            width: auto;
+        }
+    }
+}

@@ -1,0 +1,172 @@
+@use "sass:map";
+@use "../abstracts" as *;
+
+.c-services-section {
+    position: relative;
+    z-index: 1;
+    padding-bottom: fluid(64px, 120px);
+
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+.c-services-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    @include respond('xl') {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 4vw;
+    }
+
+    &__header {
+        width: 100%;
+
+        @include respond('xl') {
+            position: sticky;
+            top: 120px;
+            width: 28%;
+            flex-shrink: 0;
+        }
+    }
+}
+
+.c-services-grid {
+    &__overline {
+        @include apply-typography("overline");
+        color: $color-secondary;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    &__title {
+        @include apply-typography("heading");
+        color: $color-neutral-darkest;
+        font-weight: $font-weight-semibold;
+    }
+}
+
+.c-services-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+
+    @include respond('xl') {
+        flex-direction: row;
+        width: 72%;
+        gap: 4vw;
+        align-items: flex-start;
+    }
+}
+
+.c-services-text-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; // Clean spacing between service items on mobile
+    width: 100%;
+
+    @include respond('xl') {
+        gap: 0;
+        width: 45%;
+    }
+}
+
+.c-service-text-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @include respond('xl') {
+        min-height: 60vh; // Smooth scrolling height per item on desktop
+    }
+
+    /* Inline Mobile Media Block (Hidden on XL screens and up) */
+    &__media {
+        width: 100%;
+        aspect-ratio: 16 / 10; // Mobile / Tablet aspect ratio
+        border-radius: $border-radius-md;
+        overflow: hidden;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+
+        @include respond('xl') {
+            display: none; // Completely hidden on desktop in favor of sticky right frame
+        }
+    }
+}
+
+.c-service-img--inline {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Right Sticky Image Container (Desktop Only) */
+.c-services-media-sticky {
+    display: none; // Hidden on mobile/small screens
+
+    @include respond('xl') {
+        display: block; // Visible on XL screens
+        position: sticky;
+        top: 120px;
+        width: 55%;
+        align-self: flex-start;
+    }
+}
+
+/* Frame Holding All 4 Layered Images */
+.c-services-media-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1; // Square format on sticky desktop screens
+    overflow: hidden;
+    border-radius: $border-radius-lg;
+    background-color: $color-neutral-light;
+    @include apply-elevation("card-static");
+}
+
+.c-service-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+
+    &.is-active {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Service Typography Styling */
+.c-service-item {
+    &__number {
+        @include apply-typography("overline");
+        color: $color-secondary;
+        font-weight: $font-weight-bold;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    &__title {
+        @include apply-typography("title", $font-weight-semibold);
+        color: $color-primary;
+        margin-bottom: 0.75rem;
+    }
+
+    &__excerpt {
+        @include apply-typography("body");
+        color: $color-neutral-dark;
+        margin-bottom: 0.5rem;
+    }
+}
