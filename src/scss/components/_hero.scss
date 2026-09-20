@@ -65,10 +65,9 @@
     }
 
     &__title {
-        @include apply-typography("display");
+        @include apply-typography("display", $font-weight-black);
         color: $color-white;
         margin-bottom: 1rem;
-        font-weight: $font-weight-black;
     }
 
     &__subtitle {

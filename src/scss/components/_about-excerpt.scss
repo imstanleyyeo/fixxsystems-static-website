@@ -43,7 +43,7 @@
     }
 
     &__title {
-        @include apply-typography("heading", $font-weight-semibold);
+        @include apply-typography("subheading", $font-weight-black);
         color: $color-primary;
         margin-bottom: 1rem;
     }

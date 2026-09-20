@@ -24,8 +24,7 @@
 
     /* Unified Value Target: Locks height and font display across ALL items */
     &__value {
-        @include apply-typography("heading");
-        font-weight: $font-weight-black;
+        @include apply-typography("heading", $font-weight-semibold);
         color: $color-primary;
         line-height: 1;
         margin-bottom: 0.5rem;

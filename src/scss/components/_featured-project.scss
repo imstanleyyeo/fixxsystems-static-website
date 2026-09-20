@@ -95,9 +95,19 @@
     }
 
     .c-featured-project__title {
-        @include apply-typography("heading", $font-weight-semibold);
+        @include apply-typography("subheading", $font-weight-black);
         color: $color-white;
         margin-bottom: 0.75rem;
+    }
+
+    /* Distinct Location Metadata Styling */
+    .c-featured-project__location {
+        @include apply-typography("meta-heading"); // Muted caption or subhead size
+        color: $color-white;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
 
     /* Combined Paragraph Description */
