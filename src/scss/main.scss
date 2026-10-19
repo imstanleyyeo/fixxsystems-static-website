@@ -5,9 +5,8 @@
 
 // 2. Base stuff
 @use 'base/base';
-// @use 'base/fonts';
-// @use 'base/helpers';
 @use 'base/typography';
+// @use 'base/fonts';
 
 // 3. Layout-related sections
 @use 'layouts/sections';
@@ -23,6 +22,16 @@
 @use "components/featured-project";
 @use "components/about-excerpt";
 @use "components/inquiry";
+@use "components/subpage-hero";
+@use "components/split-50";
+@use "components/split-30-70";
+@use "components/cards";
+@use "components/project-cards";
+@use "components/project-carousel";
+@use "components/tabs";
+@use "components/forms";
+@use "components/success-archive"
+
 
 // 5. Pages
 // @use 'pages/home';

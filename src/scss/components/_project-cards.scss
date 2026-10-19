@@ -1,0 +1,99 @@
+@use "../abstracts" as *;
+
+/* ==========================================================================
+   EDITORIAL PROJECT CARD COMPONENT (.c-project-card)
+   ========================================================================== */
+
+.c-project-card {
+    width: 100%;
+
+    &__grid {
+        display: flex;
+        flex-direction: column; // Mobile default: Image comes FIRST, then content below
+        gap: 2rem;
+
+        @include respond('lg') {
+            display: grid;
+            grid-template-columns: 40% 60%; // 40/60 Split
+            gap: fluid(32px, 64px);
+            align-items: stretch; // Allows content to match image height for bottom border positioning
+        }
+    }
+
+    /* Alternating Row Layout on Desktop */
+    &--reverse &__grid {
+        @include respond('lg') {
+            grid-template-columns: 60% 40%; // 60/40 Split
+
+            .c-project-card__content {
+                order: 2; // Content stays right column on desktop
+            }
+
+            .c-project-card__media {
+                order: 1; // Media stays left column on desktop
+            }
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        border-bottom: 1px solid $color-neutral-light; // Bottom border divider for each project card
+        padding-bottom: 2rem;
+
+        @include respond('lg') {
+            justify-content: flex-start; // Align title/address/action to the top
+        }
+    }
+
+    &__title {
+        @include apply-typography("subheading", $font-weight-black);
+        color: $color-primary;
+        margin-bottom: 0.75rem;
+    }
+
+    &__location {
+        @include apply-typography("body");
+        color: $color-neutral-medium;
+        font-style: normal;
+        margin-bottom: 2rem;
+    }
+
+    &__action {
+        margin-top: auto; // Pushes CTA button toward bottom spacing on desktop
+    }
+
+    &__media {
+        border-radius: $border-radius-md;
+        overflow: hidden;
+        @include apply-elevation("card-static");
+        aspect-ratio: 16 / 10;
+        width: 100%;
+        order: -1; // Force image to ALWAYS come first on mobile/tablet stacking
+
+        @include respond('lg') {
+            order: initial; // Reset order back to normal grid layout on desktop
+        }
+    }
+
+    &__media-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        @include transition(transform, "slow");
+
+        .c-project-card:hover & {
+            transform: scale(1.03);
+        }
+    }
+}

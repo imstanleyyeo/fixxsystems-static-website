@@ -1,0 +1,19 @@
+@use "../abstracts" as *;
+
+/* ==========================================================================
+   UNIVERSAL TAB PANELS CONTAINER (.c-tab-panels)
+   ========================================================================== */
+.c-tab-panels {
+    padding-top: fluid(32px, 64px);
+    padding-bottom: fluid(64px, 96px);
+
+    &__panel {
+        display: none; // Hidden by default
+        flex-direction: column;
+        gap: fluid(48px, 96px); // Vertical spacing between project rows or product grids
+
+        &.is-active {
+            display: flex; // Displayed when active tab selected
+        }
+    }
+}

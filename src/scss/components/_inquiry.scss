@@ -1,40 +1,62 @@
 @use "../abstracts" as *;
 
+/* ==========================================================================
+   GLOBAL INQUIRY CTA BANNER (.c-inquiry)
+   ========================================================================== */
 .c-inquiry {
-    background-color: $color-neutral-lightest; // Consistent light section fill
-    border-top: 1px solid $color-neutral-light; // Distinct separator from main content
-    border-bottom: 1px solid $color-neutral-light;
 
-    &__wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.5rem;
+    border-top: 1px solid $color-neutral-light;
 
-        @include respond('md') {
-            flex-direction: row;
-            align-items: flex-end; // Aligns button to the bottom level of supporting text
-            justify-content: space-between;
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        width: 100%; // Bounds strictly within .o-container
+
+        @include respond('lg') {
+            /* 
+               Columns: Column 1 (~60%) | Column 2 (~40%)
+               minmax(0, ...) prevents track expansion beyond container width
+            */
+            grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+            column-gap: fluid(32px, 64px);
+            row-gap: 0.75rem;
+            align-items: start; // Prevents grid items from stretching
         }
     }
 
-    &__body {
-        max-width: 44rem;
-    }
-
     &__title {
-        @include apply-typography("heading", $font-weight-semibold);
+        @include apply-typography("heading", $font-weight-black);
         color: $color-primary;
-        margin-bottom: 0.5rem;
+        line-height: 1.25;
+
+        @include respond('lg') {
+            grid-column: 1 / 2; // Locked to 60% Left Column (Row 1)
+            grid-row: 1 / 2;
+        }
     }
 
     &__subtitle {
         @include apply-typography("meta-heading");
-        color: $color-neutral-medium;
-        margin-bottom: 0; // Removes margin so button aligns perfectly to baseline
+        color: $color-neutral-dark;
+        line-height: 1.6;
+
+        @include respond('lg') {
+            grid-column: 1 / 2; // Locked to 60% Left Column (Row 2)
+            grid-row: 2 / 3;
+        }
     }
 
     &__action {
-        flex-shrink: 0;
+        display: flex;
+        justify-content: flex-start;
+        min-width: 0;
+
+        @include respond('lg') {
+            grid-column: 2 / 3; // Locked to 40% Right Column (Row 2)
+            grid-row: 2 / 3; // Placed in the exact same grid row as .c-inquiry__subtitle
+            justify-content: flex-end;
+            align-items: flex-start; // Flushes top of button with top of subtitle text
+        }
     }
 }

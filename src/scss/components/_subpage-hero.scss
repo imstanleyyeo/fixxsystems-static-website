@@ -1,0 +1,53 @@
+@use "../abstracts" as *;
+
+.c-page-hero {
+    position: relative;
+    width: 100%;
+    min-height: 70vh; // Generous height to allow stickiness to display smoothly
+    background-color: $color-primary;
+
+    &__media-container {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    &__picture,
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.45) 100%);
+    }
+
+    /* Sticky Anchor Mechanics matching Homepage Hero */
+    &__content-wrapper {
+        position: sticky;
+        top: 80px; // Offset for fixed top navigation header
+        z-index: 3;
+        width: 100%;
+        padding-top: fluid(32px, 64px);
+        padding-bottom: fluid(32px, 64px);
+    }
+
+    &__body {
+        max-width: 800px;
+        color: $color-white;
+        margin-left: 0;
+    }
+
+    &__title {
+        @include apply-typography("display", $font-weight-black);
+        color: $color-white;
+    }
+}

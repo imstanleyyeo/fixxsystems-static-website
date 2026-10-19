@@ -1,0 +1,56 @@
+@use "../abstracts" as *;
+
+/* ==========================================================================
+   REUSABLE 30/70 STICKY MODULE (.c-split-30-70)
+   ========================================================================== */
+.c-split-30-70 {
+
+    &__grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+
+        @include respond('xl') {
+            flex-direction: row;
+            gap: 4vw;
+            align-items: flex-start; // Allows sticky left column to stick to grid bounds
+        }
+    }
+
+    /* Left 30% Column: Sticky Section Header */
+    &__left {
+        width: 100%;
+
+        @include respond('xl') {
+            position: sticky;
+            top: 120px; // BASELINE: Perfectly matches .c-split-50 on About & Services pages
+            width: 30%;
+            flex-shrink: 0;
+            z-index: 15;
+        }
+    }
+
+    &__overline {
+        @include apply-typography("overline");
+        color: $color-secondary;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    &__title {
+        @include apply-typography("subheading", $font-weight-black);
+        color: $color-primary;
+        line-height: 1.25;
+    }
+
+    /* Right 70% Column: Dynamic Content Space */
+    &__right {
+        width: 100%;
+        min-width: 0;
+        overflow: visible; // Crucial for nested sticky elements inside right column
+
+        @include respond('xl') {
+            width: 70%;
+        }
+    }
+}

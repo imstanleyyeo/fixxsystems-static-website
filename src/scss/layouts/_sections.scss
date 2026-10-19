@@ -36,3 +36,21 @@
         padding-bottom: fluid(32px, 64px);
     }
 }
+
+.l-systems-wrapper {
+
+    /* Adjust Left Column Title offset to account for Header (76px) + Tabs (56px) + Gap */
+    .c-split-30-70__left {
+        @include respond('xl') {
+            top: 178px; // 76px header + 58px tab bar + 24px gap (No overline clipping!)
+        }
+    }
+
+    /* Adjust Right Column Subtitles to dock right below the tab bar */
+    // .c-series-group__title {
+    //     position: sticky;
+    //     top: 134px; // 76px header + 58px tab bar
+    //     z-index: 20;
+    //     background-color: $color-white;
+    // }
+}

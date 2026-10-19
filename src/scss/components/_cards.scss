@@ -1,0 +1,143 @@
+@use "../abstracts" as *;
+
+/* ==========================================================================
+   UNIVERSAL CARD GRID SYSTEM
+   ========================================================================== */
+.c-card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: fluid(16px, 32px);
+
+    /* Standard 3-Column Modifier (Desking, 3 Team Members) */
+    &--3-col {
+        @include respond('sm') {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include respond('lg') {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* Compact 4-Column Modifier (Seating) */
+    &--4-col {
+        @include respond('sm') {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include respond('md') {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include respond('xl') {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    /* Flexible Dynamic Grid (2 or 3 items stretch proportionately) */
+    &--flexible {
+        @include respond('sm') {
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+    }
+
+    /* FEATURED GRID MODIFIER (1 Large Card Top, 2 Equal Cards Bottom) */
+    &--featured-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: fluid(16px, 32px);
+
+        @include respond('sm') {
+            grid-template-columns: repeat(2, 1fr); // 2 equal columns on desktop
+        }
+    }
+}
+
+/* ==========================================================================
+   UNIVERSAL CARD COMPONENT
+   ========================================================================== */
+.c-card {
+    width: 100%;
+    border-bottom: 1px solid $color-neutral-light;
+
+    /* Default Aspect Ratio (16/10 Landscape) */
+    &__media {
+        aspect-ratio: 16 / 10;
+        border-radius: $border-radius-md;
+        overflow: hidden;
+        background-color: $color-neutral-light;
+
+        &--square {
+            aspect-ratio: 1 / 1;
+        }
+
+        &--portrait {
+            aspect-ratio: 4 / 5;
+        }
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+    }
+
+    &__content {
+        padding: 0.875rem 0;
+    }
+
+    &__title {
+        @include apply-typography("meta-heading");
+        color: $color-primary;
+        margin-bottom: 0.25rem;
+    }
+
+    &__meta {
+        @include apply-typography("caption");
+        color: $color-neutral-medium;
+    }
+
+    /* Featured Modifier (First item in System Panels) */
+    &--featured {
+        @include respond('sm') {
+            grid-column: 1 / -1;
+        }
+
+        .c-card__media {
+            aspect-ratio: 16 / 9;
+        }
+    }
+
+    /* ----------------------------------------------------------------------
+       TEAM CARD MODIFIER (.c-card--team)
+       ---------------------------------------------------------------------- */
+    &--team {
+        // border-bottom: none; // Team cards don't require bottom border dividers
+
+        .c-card__media {
+            aspect-ratio: 1 / 1; // 1:1 Headshot ratio
+            border-radius: $border-radius-sm;
+        }
+
+        .c-card__title {
+            margin-bottom: 0; // Removes bottom margin so role sits tight under name
+        }
+    }
+}
+
+/* ==========================================================================
+   SERIES GROUP HEADER (.c-series-group)
+   ========================================================================== */
+.c-series-group {
+    margin-bottom: fluid(40px, 64px);
+
+    /* Clean static heading that scrolls naturally with card content */
+    &__title {
+        @include apply-typography("subtitle", $font-weight-black);
+        color: $color-neutral-dark;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+    }
+}

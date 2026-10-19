@@ -1,5 +1,9 @@
-@use '../abstracts/variables' as *;
-@use '../abstracts/mixins' as *;
+@use '../abstracts' as *;
+
+:root {
+    --header-height: 76px; // Match actual measured height of .c-header
+    --tabs-height: 58px; // Match actual measured height of .c-sticky-tabs
+}
 
 /* ==========================================================================
    GLOBAL ROOT & DOCUMENT BASE

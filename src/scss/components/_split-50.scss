@@ -1,0 +1,80 @@
+@use "../abstracts" as *;
+
+/* ==========================================================================
+   REUSABLE 50/50 EDITORIAL SPLIT MODULE (.c-split-50)
+   ========================================================================== */
+.c-split-50 {
+
+    /* 50/50 Outer Grid Split */
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: fluid(32px, 64px);
+
+        @include respond('lg') {
+            grid-template-columns: repeat(2, 1fr); // 50 / 50 Outer Split
+            align-items: start; // Required for sticky behavior bounds
+        }
+    }
+
+    /* Left Column: Sticky Container with Sub-grid Layout */
+    &__left {
+        width: 100%;
+
+        @include respond('lg') {
+            position: sticky;
+            top: 120px; // Aligns comfortably under top navigation during scroll
+            align-self: flex-start;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); // Inner 4-column sub-grid for exact header balance
+        }
+    }
+
+    /* Header Spans First 3 Sub-Columns on Desktop */
+    &__header {
+        width: 100%;
+
+        @include respond('lg') {
+            grid-column: 1 / span 3; // Occupies 3 out of 4 columns cleanly
+        }
+    }
+
+    &__overline {
+        @include apply-typography("overline");
+        color: $color-secondary;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    &__title {
+        @include apply-typography("subheading", $font-weight-black);
+        color: $color-primary;
+        line-height: 1.25;
+    }
+
+    /* Right Column: Narrative Content Stack */
+    &__right {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        min-width: 0; // Prevents layout shifts/overflows
+    }
+
+    &__lead {
+        @include apply-typography("subtitle", $font-weight-black);
+        color: $color-primary;
+        padding-left: 1.25rem;
+        border-left: 3px solid $color-secondary; // Editorial accent indicator
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__text {
+        @include apply-typography("body");
+        color: $color-neutral-dark;
+    }
+}

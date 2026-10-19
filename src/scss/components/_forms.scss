@@ -1,0 +1,87 @@
+@use '../abstracts' as *;
+
+/* ==========================================================================
+   WEBFORM COMPONENT (.c-form)
+   ========================================================================== */
+
+.c-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+
+    &__group {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    &__label {
+        @include apply-typography("meta-heading");
+        color: $color-primary;
+        margin-bottom: 0.5rem;
+    }
+
+    // Base Styles for Text/Email/Tel Inputs & Textarea
+    &__input,
+    &__textarea {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid rgba($color-primary, 0.25);
+        border-radius: 0;
+        padding: 0.5rem 0;
+        color: $color-primary;
+        @include apply-typography("body");
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+        &::placeholder {
+            color: rgba($color-primary, 0.35);
+        }
+
+        &:focus {
+            outline: none;
+            border-bottom-color: $color-secondary;
+            box-shadow: 0 1px 0 0 $color-secondary;
+        }
+
+        // Webkit Auto-fill Fixes
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus {
+            -webkit-text-fill-color: $color-primary;
+            -webkit-box-shadow: 0 0 0px 1000px $color-white inset;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+    }
+
+    &__textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    /* Error Validation State */
+    &__error {
+        display: none;
+        font-size: 0.8125rem;
+        color: #d9534f;
+        margin-top: 0.375rem;
+    }
+
+    &__group.is-invalid {
+
+        .c-form__input,
+        .c-form__textarea {
+            border-bottom-color: #d9534f;
+            box-shadow: 0 1px 0 0 #d9534f;
+        }
+
+        .c-form__error {
+            display: block;
+        }
+    }
+
+    &__action {
+        margin-top: 1rem;
+    }
+}
