@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fixx Systems - Homepage</title>
+    <meta name="description" content="">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Vite JS & SCSS Entry Point -->
+    <script type="module" src="./js/main.js"></script>
+
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <meta property="og:image:alt" content="">
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icon.png">
+</head>
+
+<body>
+
+    <!-- Mobile Off-Canvas Drawer -->
+    <aside class="c-drawer" id="offCanvas" aria-hidden="true">
+        <div class="c-drawer__header">
+            <a class="c-drawer__logo-link" href="index.html">
+                <img class="c-drawer__logo" src="./assets/svgs/logo-sg.svg" width="218" height="64"
+                    alt="Fixx Systems Singapore Logo" />
+            </a>
+
+            <!-- Close Button (Left Arrow) -->
+            <button class="c-drawer__close" id="drawerClose" aria-label="Close Navigation">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Scrollable Body (Only items from here downwards will scroll) -->
+        <div class="c-drawer__body">
+            <!-- WordPress Primary Menu Placement (Drawer Context) -->
+            <nav class="c-drawer__nav">
+                <ul class="c-drawer__menu">
+                    <li class="c-drawer__item"><a class="c-drawer__link" href="about.html">About</a></li>
+                    <li class="c-drawer__item"><a class="c-drawer__link" href="services.html">Services</a></li>
+                    <li class="c-drawer__item"><a class="c-drawer__link" href="projects.html">Projects</a></li>
+                    <li class="c-drawer__item"><a class="c-drawer__link" href="success-stories.html">Success Stories</a>
+                    </li>
+                    <li class="c-drawer__item"><a class="c-drawer__link" href="office-products.html">Office Products</a>
+                    </li>
+                    <!-- Key Conversion CTA Button -->
+                    <li class="c-drawer__item c-drawer__item--cta">
+                        <a class="c-btn c-btn--accent" href="enquiry.html">Make an Enquiry</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Static Widget Content (Separate from WP Nav) -->
+            <div class="c-drawer__contacts">
+                <div class="c-drawer__contact-group">
+                    <span class="c-drawer__contact-heading">Singapore Contact</span>
+                    <a class="c-drawer__contact-link" href="tel:62993901">(+65) 6299 3901</a>
+                </div>
+                <div class="c-drawer__contact-group">
+                    <span class="c-drawer__contact-heading">Vietnam Contact</span>
+                    <a class="c-drawer__contact-link" href="tel:84837960444">(+84) 8 3796 0444</a>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Global Overlay -->
+    <div class="c-overlay" id="overlay"></div>
+
+    <!-- Pure CSS Floating Expanding WhatsApp CTA -->
+    <a href="https://wa.me/6562993901" class="c-btn--whatsapp" target="_blank" rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path
+                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+        </svg>
+        <span class="c-btn__text--whatsapp">Chat on WhatsApp</span>
+    </a>
+
+    <!-- Sticky Header Bar -->
+    <header class="c-header">
+        <div class="c-header__container">
+
+            <div class="c-header__brand">
+                <!-- Mobile Toggle -->
+                <button class="c-header__toggle" id="toggle" aria-label="Toggle Navigation">
+                    <span class="c-header__toggle-bar"></span>
+                    <span class="c-header__toggle-bar"></span>
+                    <span class="c-header__toggle-bar"></span>
+                    <span class="c-header__toggle-bar"></span>
+                </button>
+
+                <!-- Site Logo -->
+                <a class="c-header__logo-link" href="index.html">
+                    <img class="c-header__logo" src="./assets/svgs/logo-sg.svg" width="218" height="64"
+                        alt="Fixx Systems Singapore Logo" />
+                </a>
+            </div>
+
+            <!-- WordPress Primary Menu Placement (Desktop Context) -->
+            <nav class="c-header__nav">
+                <ul class="c-header__menu">
+                    <li class="c-header__item"><a class="c-header__link" href="about.html">About</a></li>
+                    <li class="c-header__item"><a class="c-header__link" href="services.html">Services</a></li>
+                    <li class="c-header__item"><a class="c-header__link" href="projects.html">Projects</a></li>
+                    <li class="c-header__item"><a class="c-header__link" href="success-stories.html">Success Stories</a>
+                    </li>
+                    <li class="c-header__item"><a class="c-header__link" href="office-products.html">Office Products</a>
+                    </li>
+                    <li class="c-header__item">
+                        <a class="c-btn c-btn--accent" href="enquiry.html">Make an Enquiry</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+     SUBPAGE HERO WITH STICKY CONTENT (.c-page-hero)
+     ========================================================================== -->
+    <section class="c-page-hero">
+        <div class="c-page-hero__media-container">
+            <picture class="c-page-hero__picture">
+                <img src="./assets/images/services-bg.webp" alt="Services at FIXX Systems" class="c-page-hero__img"
+                    width="1920" height="1080" loading="eager" decoding="async" />
+            </picture>
+            <div class="c-page-hero__overlay"></div>
+        </div>
+
+        <!-- Sticky Content Wrapper (Anchors top-left while container scrolls) -->
+        <div class="o-container c-page-hero__content-wrapper">
+            <div class="c-page-hero__body">
+                <h1 class="c-page-hero__title">Our Capabilities &amp; Services</h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+     INTRO NARRATIVE (50/50 SPLIT MODULE)
+     ========================================================================== -->
+    <section class="l-section c-split-50">
+        <div class="o-container">
+            <div class="c-split-50__grid">
+
+                <!-- Sticky Left Column -->
+                <div class="c-split-50__left">
+                    <header class="c-split-50__header">
+                        <span class="c-split-50__overline">Why FIXX Systems</span>
+                        <h2 class="c-split-50__title">Turnkey Precision for High-Stakes Commercial &amp; Retail
+                            Environments</h2>
+                    </header>
+                </div>
+
+                <!-- Right Column SEO Content Narrative -->
+                <div class="c-split-50__right">
+                    <p class="c-split-50__lead">
+                        Successful commercial fit-outs require absolute alignment between design intent, manufacturing
+                        engineering, and site execution. FIXX Systems delivers complete project certainty from concept
+                        through final handover.
+                    </p>
+                    <div class="c-split-50__body">
+                        <p class="c-split-50__text">
+                            Design and build projects are inherently complex. Without rigorous oversight, the majority
+                            of interior builds suffer from quality trade-offs, budget creep, and timeline delays.
+                        </p>
+                        <p class="c-split-50__text">
+                            Our single-point-of-contact project management framework guarantees full accountability. We
+                            integrate custom manufacturing, global procurement, value engineering, quality assurance,
+                            and site installation into a seamless turnkey execution package.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+     PROJECT CAPABILITIES (30/70 STICKY MODULE)
+     ========================================================================== -->
+    <section class="l-section c-split-30-70">
+        <div class="o-container">
+            <div class="c-split-30-70__grid">
+
+                <!-- Sticky Left Title Column -->
+                <div class="c-split-30-70__left">
+                    <span class="c-split-30-70__overline">Turnkey Delivery</span>
+                    <h2 class="c-split-30-70__title">Project Capabilities</h2>
+                </div>
+
+                <!-- Right Column Grid -->
+                <div class="c-split-30-70__right">
+                    <div class="c-card-grid c-card-grid--flexible">
+
+                        <article class="c-card">
+                            <div class="c-card__media">
+                                <img src="./assets/images/services-contract-management.webp"
+                                    alt="Contract Management Services" class="c-card__img" width="400" height="250"
+                                    loading="lazy" decoding="async" />
+                            </div>
+                            <div class="c-card__content">
+                                <h3 class="c-card__title">Contract Management</h3>
+                                <p class="c-card__meta">Transparent budget allocation, value engineering, risk
+                                    mitigation, and commercial compliance from award to final site account settlement.
+                                </p>
+                            </div>
+                        </article>
+
+                        <article class="c-card">
+                            <div class="c-card__media">
+                                <img src="./assets/images/services-project-management.webp"
+                                    alt="Turnkey Project Management" class="c-card__img" width="400" height="250"
+                                    loading="lazy" decoding="async" />
+                            </div>
+                            <div class="c-card__content">
+                                <h3 class="c-card__title">Project Management</h3>
+                                <p class="c-card__meta">Dedicated site governance managing trade coordination,
+                                    aggressive timeline schedules, and strict safety standards.</p>
+                            </div>
+                        </article>
+
+                        <article class="c-card">
+                            <div class="c-card__media">
+                                <img src="./assets/images/services-drafting.webp"
+                                    alt="Technical Drafting and CAD Engineering" class="c-card__img" width="400"
+                                    height="250" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="c-card__content">
+                                <h3 class="c-card__title">Technical Drafting &amp; CAD</h3>
+                                <p class="c-card__meta">Production-ready shop drawings, structural joinery details, and
+                                    3D space allocation built for exact shop fabrication.</p>
+                            </div>
+                        </article>
+
+                        <article class="c-card">
+                            <div class="c-card__media">
+                                <img src="./assets/images/services-purchasing.webp"
+                                    alt="Material Procurement and Sourcing" class="c-card__img" width="400" height="250"
+                                    loading="lazy" decoding="async" />
+                            </div>
+                            <div class="c-card__content">
+                                <h3 class="c-card__title">Procurement &amp; Logistics</h3>
+                                <p class="c-card__meta">Global sourcing of architectural grade hardware, sustainable raw
+                                    materials, and streamlined supply chain staging.</p>
+                            </div>
+                        </article>
+
+                        <article class="c-card">
+                            <div class="c-card__media">
+                                <img src="./assets/images/services-quality-control.webp"
+                                    alt="Quality Control Inspections" class="c-card__img" width="400" height="250"
+                                    loading="lazy" decoding="async" />
+                            </div>
+                            <div class="c-card__content">
+                                <h3 class="c-card__title">Quality Control Assurance</h3>
+                                <p class="c-card__meta">Multi-stage factory benchmarking and site defect inspections
+                                    ensuring zero-tolerance alignment with client mockups.</p>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+     PRODUCTION CAPABILITIES (30/70 STICKY MODULE)
+     ========================================================================== -->
+    <section class="l-section c-split-30-70">
+        <div class="o-container">
+            <div class="c-split-30-70__grid">
+
+                <!-- Sticky Left Title Column -->
+                <div class="c-split-30-70__left">
+                    <span class="c-split-30-70__overline">In-House Manufacturing</span>
+                    <h2 class="c-split-30-70__title">Production Capabilities</h2>
+                </div>
+
+                <!-- Right Column 3-Column Card Grid -->
+                <div class="c-split-30-70__right">
+                    <div class="c-card-grid c-card-grid--3-col">
+
+                        <article class="c-card">
+                            <div class="c-card__media">
+                                <img src="./assets/images/services-metal.webp"
+                                    alt="Custom Architectural Metal Fabrication" class="c-card__img" width="400"
+                                    height="250" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="c-card__content">
+                                <h3 class="c-card__title">Architectural Metalwork</h3>
+                                <p class="c-card__meta">Precision stainless steel, brushed aluminum, brass, and
+                                    structural iron fabrication for high-traffic retail frames and features.</p>
+                            </div>
+                        </article>
+
+                        <article class="c-card">
+                            <div class="c-card__media">
+                                <img src="./assets/images/services-glass.webp" alt="Custom Commercial Glass Glazing"
+                                    class="c-card__img" width="400" height="250" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="c-card__content">
+                                <h3 class="c-card__title">Structural &amp; Decorative Glass</h3>
+                                <p class="c-card__meta">Tempered, laminated, acoustic, and tinted glazing installations
+                                    for storefront enclosures, office partitions, and display cases.</p>
+                            </div>
+                        </article>
+
+                        <article class="c-card">
+                            <div class="c-card__media">
+                                <img src="./assets/images/services-acrylic.webp" alt="Custom Acrylic Fabrication"
+                                    class="c-card__img" width="400" height="250" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="c-card__content">
+                                <h3 class="c-card__title">Acrylic &amp; Polymer Displays</h3>
+                                <p class="c-card__meta">High-clarity laser-cut acrylic fabrication engineered for
+                                    backlit boutique signage, display risers, and luxury retail fixtures.</p>
+                            </div>
+                        </article>
+
+                        <article class="c-card">
+                            <div class="c-card__media">
+                                <img src="./assets/images/services-veneer.webp" alt="Architectural Wood Veneers"
+                                    class="c-card__img" width="400" height="250" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="c-card__content">
+                                <h3 class="c-card__title">Wood Veneers &amp; Laminates</h3>
+                                <p class="c-card__meta">Exotic and sustainable natural wood veneer matching,
+                                    book-matching, and high-pressure laminate pressing for custom cabinetry.</p>
+                            </div>
+                        </article>
+
+                        <article class="c-card">
+                            <div class="c-card__media">
+                                <img src="./assets/images/services-solid-surface.webp"
+                                    alt="Solid Surface Countertops Fabrication" class="c-card__img" width="400"
+                                    height="250" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="c-card__content">
+                                <h3 class="c-card__title">Solid Surface &amp; Stone</h3>
+                                <p class="c-card__meta">Seamless thermoformed solid surfaces, quartz, and marble
+                                    fabrication for reception desks, vanity tops, and bar counters.</p>
+                            </div>
+                        </article>
+
+                        <article class="c-card">
+                            <div class="c-card__media">
+                                <img src="./assets/images/services-electrical.webp"
+                                    alt="Integrated Commercial Electrical Systems" class="c-card__img" width="400"
+                                    height="250" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="c-card__content">
+                                <h3 class="c-card__title">Integrated Electrical &amp; Lighting</h3>
+                                <p class="c-card__meta">Concealed LED strip integration, specialized display
+                                    illumination, power tracking systems, and safety wiring compliance.</p>
+                            </div>
+                        </article>
+
+                        <article class="c-card">
+                            <div class="c-card__media">
+                                <img src="./assets/images/services-fabric-leather.webp"
+                                    alt="Upholstery Fabric and Leather Joinery" class="c-card__img" width="400"
+                                    height="250" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="c-card__content">
+                                <h3 class="c-card__title">Upholstery &amp; Leather Work</h3>
+                                <p class="c-card__meta">Bespoke acoustic wall padding, contract-grade leather paneling,
+                                    and custom booth seating for hospitality and executive suites.</p>
+                            </div>
+                        </article>
+
+                        <article class="c-card">
+                            <div class="c-card__media">
+                                <img src="./assets/images/services-millworks.webp" alt="Bespoke Architectural Millwork"
+                                    class="c-card__img" width="400" height="250" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="c-card__content">
+                                <h3 class="c-card__title">Architectural Millwork &amp; Joinery</h3>
+                                <p class="c-card__meta">Precision CNC-routed timber structures, intricate feature walls,
+                                    and custom built-in furniture manufactured to millimeter tolerances.</p>
+                            </div>
+                        </article>
+
+                        <article class="c-card">
+                            <div class="c-card__media">
+                                <img src="./assets/images/services-painting-varnishing.webp"
+                                    alt="Industrial Finishing and Coating" class="c-card__img" width="400" height="250"
+                                    loading="lazy" decoding="async" />
+                            </div>
+                            <div class="c-card__content">
+                                <h3 class="c-card__title">Industrial Spray &amp; Lacquer Finish</h3>
+                                <p class="c-card__meta">Dust-free booth spray painting, high-gloss PU lacquering,
+                                    polyurethane coatings, and hand-rubbed wood stain finishes.</p>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+     CALL-TO-ACTION INQUIRY BANNER
+     ========================================================================== -->
+    <section class="l-section l-section--white c-inquiry">
+        <div class="o-container">
+            <div class="c-inquiry__grid">
+
+                <!-- Title: Placed in Column 1, Row 1 -->
+                <h2 class="c-inquiry__title">
+                    Ready to Realise Your Next Fit-Out Project?
+                </h2>
+
+                <!-- Subtitle: Placed in Column 1, Row 2 -->
+                <p class="c-inquiry__subtitle">
+                    Partner with FIXX Systems to deliver your commercial, corporate, or luxury retail space on time
+                    and within budget.
+                </p>
+
+                <!-- CTA Action: Placed in Column 2, Row 2 (Aligned directly with Subtitle) -->
+                <div class="c-inquiry__action">
+                    <a href="projects.html" class="c-btn c-btn--primary">View Our Portfolio</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+     FOOTER BLOCK (.c-footer)
+     ========================================================================== -->
+    <footer class="c-footer">
+        <div class="o-container">
+            <!-- 2-Column Symmetrical Office Grid -->
+            <div class="c-footer__grid">
+
+                <!-- Singapore Office Column -->
+                <div class="c-footer__col">
+                    <a href="index.html" class="c-footer__logo-link" aria-label="Fixx Systems Singapore">
+                        <img src="./assets/svgs/logo-sg.svg" alt="Fixx Systems Singapore Logo" class="c-footer__logo"
+                            loading="lazy" />
+                    </a>
+                    <h3 class="c-footer__heading">Singapore Office</h3>
+                    <address class="c-footer__address">
+                        <p class="c-footer__text">
+                            Fixx Systems Pte Ltd<br>
+                            201 Henderson Road #04-04/05<br>
+                            Apex@Henderson<br>
+                            Singapore 159545
+                        </p>
+                        <a href="tel:+6562993901" class="c-footer__contact-link">(+65) 6299 3901</a>
+                    </address>
+                </div>
+
+                <!-- Vietnam Office Column -->
+                <div class="c-footer__col">
+                    <a href="index.html" class="c-footer__logo-link" aria-label="Fixx Systems Vietnam">
+                        <img src="./assets/svgs/logo-vn.svg" alt="Fixx Systems Vietnam Logo" class="c-footer__logo"
+                            loading="lazy" />
+                    </a>
+                    <h3 class="c-footer__heading">Vietnam Office / Factory</h3>
+                    <address class="c-footer__address">
+                        <p class="c-footer__text">
+                            198/1 Ho Van Tang St.,<br>
+                            Tan Phu Trung, Cu Chi,<br>
+                            Ho Chi Minh City, Vietnam
+                        </p>
+                        <a href="tel:+84837960444" class="c-footer__contact-link">(+84) 8 3796 0444</a>
+                    </address>
+                </div>
+
+            </div>
+
+            <!-- Horizontal Social Links Row (Restored above divider) -->
+            <div class="c-footer__social-wrapper">
+                <!-- <span class="c-footer__social-heading">Connect With Us:</span> -->
+                <ul class="c-footer__social-list">
+                    <li class="c-footer__social-item"><a href="#" class="c-footer__social-link">TikTok</a></li>
+                    <li class="c-footer__social-item"><a href="#" class="c-footer__social-link">Facebook</a></li>
+                    <li class="c-footer__social-item"><a href="#" class="c-footer__social-link">Instagram</a></li>
+                </ul>
+            </div>
+
+            <!-- Footer Bottom Bar -->
+            <div class="c-footer__bottom">
+                <p class="c-footer__copyright">
+                    &copy; <span id="js-copyright-year">2026</span> Fixx Systems Pte Ltd. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
