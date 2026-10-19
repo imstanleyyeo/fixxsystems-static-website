@@ -1,0 +1,40 @@
+// abstracts/_functions.scss
+@use "sass:map";
+@use "sass:math";
+@use "variables" as *; // Reads maps from variables
+
+// 1. Scaled Typography Helper
+@function get-size($step) {
+    // $font-scale-ratio comes from _variables.scss
+    @return math.pow($font-scale-ratio, $step) * 1rem;
+}
+
+// 2. Z-Index Getter Shorthand
+@function z($key) {
+    @if map.has-key($z-index, $key) {
+        @return map.get($z-index, $key);
+    }
+
+    @warn "Unknown z-index key '#{$key}' in $z-index map.";
+    @return null;
+}
+
+// 3. Elevation Getter Shorthand
+@function elevation($key) {
+    @if map.has-key($elevations, $key) {
+        @return map.get($elevations, $key);
+    }
+
+    @warn "Unknown elevation key '#{$key}' in $elevations map.";
+    @return null;
+}
+
+// 4. Breakpoint Getter Shorthand
+@function bp($key) {
+    @if map.has-key($breakpoints, $key) {
+        @return map.get($breakpoints, $key);
+    }
+
+    @warn "Unknown breakpoint key '#{$key}' in $breakpoints map.";
+    @return null;
+}
